@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>New York Data Drip – Coffee Analytics Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 12px 20px;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      height: 60px;
+      width: auto;
+      border-radius: 50%;
+    }
+
+    .header-text h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .header-text .subtitle {
+      margin: 4px 0 0;
+      color: #555;
+      font-size: 13px;
+    }
+
+    .nav-buttons {
+      margin-top: 8px;
+    }
+
+    .nav-buttons button {
+      margin-right: 10px;
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #f5f5f5;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .nav-buttons button.active {
+      background-color: #0055a4;
+      color: white;
+      border-color: #0055a4;
+    }
+
+    .main {
+      flex: 1;
+    }
+
+    .viz-wrapper {
+      width: 100%;
+      height: 100%;
+    }
+
+    .viz-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 600px;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <!-- Logo -->
+    <img src="ny-data-drip-logo.jpg" alt="New York Data Drip Logo" class="logo" />
+
+    <!-- Title + buttons -->
+    <div class="header-text">
+      <h1>New York Data Drip – Coffee Analytics Hub</h1>
+      <p class="subtitle">Explore Revenue, Profitability, and Traffic dashboards.</p>
+
+      <div class="nav-buttons">
+        <button id="btn-revenue" class="active" onclick="showDashboard('revenue')">Revenue</button>
+        <button id="btn-profitability" onclick="showDashboard('profitability')">Profitability</button>
+        <button id="btn-traffic" onclick="showDashboard('traffic')">Traffic</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="main">
+    <div class="viz-wrapper">
+      <iframe
+        id="tableauFrame"
+        src="https://public.tableau.com/views/Revenueedited11_2/finalDashboard?:showVizHome=no&:embed=true">
+      </iframe>
+    </div>
+  </div>
+
+  <script>
+    const urls = {
+      revenue: "https://public.tableau.com/views/Revenueedited11_2/finalDashboard?:showVizHome=no&:embed=true",
+      profitability: "https://public.tableau.com/views/profitabilityedited12_2/FinalDashboard?:showVizHome=no&:embed=true",
+      traffic: "https://public.tableau.com/views/coffeeshoptrafficFinal/FinalDashboard-traffic?:showVizHome=no&:embed=true"
+    };
+
+    function showDashboard(key) {
+      const frame = document.getElementById("tableauFrame");
+      frame.src = urls[key];
+
+      document.getElementById("btn-revenue").classList.remove("active");
+      document.getElementById("btn-profitability").classList.remove("active");
+      document.getElementById("btn-traffic").classList.remove("active");
+
+      if (key === "revenue") {
+        document.getElementById("btn-revenue").classList.add("active");
+      } else if (key === "profitability") {
+        document.getElementById("btn-profitability").classList.add("active");
+      } else if (key === "traffic") {
+        document.getElementById("btn-traffic").classList.add("active");
+      }
+    }
+  </script>
+</body>
+</html>
